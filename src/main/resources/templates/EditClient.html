@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Edition</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+
+        <form th:action="@{updateClient}" method="post">
+            <div>
+                <label class="form-label" hidden="hidden" for="id">ID : </label>
+                <input class="form-control" hidden="hidden" type="text" id="id" name="id" th:value="${clientVue.id}">
+            </div>
+            <div>
+                <label class="form-label" for="nom">Name : </label>
+                <input class="form-control" type="text" id="nom" name="nom" th:value="${clientVue.nom}">
+            </div>
+
+            <div>
+                <label class="form-label" for="email">Email : </label>
+                <input class="form-control" type="email" id="email" name="email" th:value="${clientVue.email}">
+            </div>
+            <div>
+                <label class="form-label" for="password">Password : </label>
+                <input class="form-control" type="password" id="password" name="password" th:value="${clientVue.password}">
+            </div>
+            <div>
+                <label class="form-label" for="telephone">Phone number : </label>
+                <input class="form-control" type="text" id="telephone" name="telephone" th:value="${clientVue.telephone}">
+            </div>
+            <div>
+                <label class="form-label" for="adresse">Address : </label>
+                <input class="form-control" type="text" id="adresse" name="adresse" th:value="${clientVue.adresse}">
+            </div>
+            <div>
+                <label class="form-label" for="date_de_naissance">Date of Birth : </label>
+                <input class="form-control" type="text" id="date_de_naissance" name="date_de_naissance" th:value="${clientVue.date_de_naissance}">
+            </div>
+            <div>
+                <label class="form-label" for="numéro_de_sécurité">Security number : </label>
+                <input class="form-control" type="number" id="numéro_de_sécurité" name="numéro_de_sécurité" th:value="${clientVue.numéro_de_sécurité}">
+
+            </div>
+            <div>
+                <input class="form-control btn btn-primary" type="submit" value="Update">
+            </div>
+        </form>
+    </main>
+
+</div>
+</body>
+</html>
+
+
+

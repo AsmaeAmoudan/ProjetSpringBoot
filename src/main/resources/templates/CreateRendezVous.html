@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Creation</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+
+        <form th:action="@{saveRendezVous}" method="post">
+            <div>
+                <label class="form-label" for="time">Time : </label>
+                <input class="form-control" type="text" id="time" name="time">
+            </div>
+            <div>
+
+            <div>
+                <label class="form-label" for="status">Status : </label>
+                <input class="form-control" type="text" id="status" name="status">
+            </div>
+
+            <div>
+                <input class="form-control btn btn-primary" type="submit" value="Save">
+            </div>
+        </form>
+    </main>
+
+</div>
+</body>
+</html>
+
+
+

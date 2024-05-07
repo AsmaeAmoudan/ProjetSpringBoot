@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Creation</title>
+</head>
+<body>
+<div layout:fragment="content">
+<main class="container mt-5">
+
+<form th:action="@{saveClient}" method="post">
+        <div>
+            <label class="form-label" for="nom">Name : </label>
+            <input class="form-control" type="text" id="nom" name="nom">
+        </div>
+
+        <div>
+            <label class="form-label" for="email">Email : </label>
+            <input class="form-control" type="email" id="email" name="email">
+        </div>
+        <div>
+            <label class="form-label" for="password">Password : </label>
+            <input class="form-control" type="password" id="password" name="password">
+        </div>
+        <div>
+            <label class="form-label" for="telephone">Phone number : </label>
+            <input class="form-control" type="text" id="telephone" name="telephone">
+        </div>
+        <div>
+            <label class="form-label" for="address">Address : </label>
+            <input class="form-control" type="text" id="address" name="address">
+        </div>
+        <div>
+            <label class="form-label" for="date_de_naissance">Date of Birth : </label>
+            <input class="form-control" type="text" id="date_de_naissance" name="date_de_naissance">
+        </div>
+        <div>
+            <label class="form-label" for="numéro_de_sécurité">Security number : </label>
+            <input class="form-control" type="number" id="numéro_de_sécurité" name="numéro_de_sécurité">
+
+        </div>
+        <div>
+            <input class="form-control btn btn-primary" type="submit" value="Save">
+        </div>
+    </form>
+</main>
+
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html"
+>
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawyers List</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <main class="container mt-5">
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOM</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">PASSWORD</th>
+                <th scope="col">TELEPHONE</th>
+                <th scope="col">ADDRESS</th>
+                <th scope="col">EXPERIENCY</th>
+                <th scope="col">WORKING HOURS</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="avocat:${avocatsVue}">
+                <td th:text="${avocat.id}"></td>
+                <td th:text="${avocat.nom}"></td>
+                <td th:text="${avocat.email}"></td>
+                <td th:text="${avocat.password}"></td>
+                <td th:text="${avocat.telephone}"></td>
+                <td th:text="${avocat.adresse}"></td>
+                <td th:text="${avocat.expérience}"></td>
+                <td th:text="${avocat.horaire_de_travail}"></td>
+
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="btn bg-danger"
+                       onclick="return confirm('Are you sure you want to delete?')"
+                       th:href="@{deleteAvocat(id=${avocat.id})}">
+                        Delete
+                    </a>
+                </td>
+
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a class="btn bg-success"
+                       th:href="@{editAvocat(id=${avocat.id})}">
+                        Update
+                    </a>
+                </td>
+
+            </tr>
+
+            </tbody>
+        </table>
+    </main>
+
+</div>
+</body>
+</html>
+
