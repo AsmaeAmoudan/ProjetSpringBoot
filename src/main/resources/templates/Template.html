@@ -34,18 +34,33 @@
                 <li><a class="dropdown-item" th:href="@{avocatsList}">List</a></li>
             </ul>
         </li>
-        <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'',''USER'')')}">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Appointment</a>
+        <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Specialties</a>
             <ul class="dropdown-menu">
                 <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-                    <a class="dropdown-item" th:href="@{createRendezVous}">New</a>
+
+                    <a class="dropdown-item" th:href="@{createSpecialite}">New</a>
                 </li>
+
+            </ul>
+        </li>
+        <li th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Offices</a>
+            <ul class="dropdown-menu">
+                <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+
+                    <a class="dropdown-item" th:href="@{createBureau}">New</a>
+                </li>
+
+            </ul>
+        </li>
+        <li th:if="${#authorization.expression('hasRole(''USER'')')}">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Appointment</a>
+            <ul class="dropdown-menu">
+                <a class="dropdown-item" th:href="@{createRendezVous}">New</a>
                 <li><a class="dropdown-item" th:href="@{rendezVousList}">List</a></li>
             </ul>
         </li>
-
-
-
 
     </ul>
     <ul class="navbar-nav">

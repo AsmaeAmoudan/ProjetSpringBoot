@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "user_type")
 @Data //getter + setter (lombok)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder //enregistre dans la BD depuis le code - BD no vierge
 
-public class User {
+public /* abstract */ class User {
     @Id
     private String userId;
     @Column(unique = true)

@@ -3,8 +3,10 @@ package org.solution.projet.controllers;
 import lombok.AllArgsConstructor;
 import org.solution.projet.entities.Avocat;
 import org.solution.projet.entities.Client;
+import org.solution.projet.entities.Specialite;
 import org.solution.projet.services.AvocatService;
 import org.solution.projet.services.ClientService;
+import org.solution.projet.services.SpecialiteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +20,12 @@ import java.util.List;
 public class AvocatController {
 
     private AvocatService avocatService;
+    private SpecialiteService specialiteService;
 
     @RequestMapping("/createAvocat")
-    public String createAvocat(){
+    public String createAvocat(ModelMap modelMap){
+        List<Specialite> specialitesController= specialiteService.getAllSpecialite();
+        modelMap.addAttribute("specialitesVue", specialitesController);
         return "CreateAvocat";
     }
 
@@ -54,7 +59,7 @@ public class AvocatController {
         Avocat avocat = avocatService.getAvocatById(id);
         if (avocat != null) {
             modelMap.addAttribute("avocatVue", avocat);
-            return "editAvocat";
+            return "EditAvocat";
         } else {
             // Gérer le cas où l'avocat n'est pas trouvé
             return "error";
@@ -65,7 +70,7 @@ public class AvocatController {
     @RequestMapping("/updateAvocat")
     public String updateAvocat(@ModelAttribute("avocatVue")Avocat avocatController){
         avocatService.updateAvocat(avocatController);
-        return "createAvocat";
+        return "CreateAvocat";
 
     }
 }

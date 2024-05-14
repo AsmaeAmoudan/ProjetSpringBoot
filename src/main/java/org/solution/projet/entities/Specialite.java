@@ -22,7 +22,6 @@ public class Specialite {
     private String nom;
     private String description;
 
-    @OneToMany(mappedBy = "specialite", fetch= FetchType.LAZY)
-    private List<Avocat> avocats= new ArrayList<>();
-
+    @ManyToMany(mappedBy = "specialites") // Bidirectional mapping, managed by Avocat
+    private List<Avocat> avocats = new ArrayList<>();
 }

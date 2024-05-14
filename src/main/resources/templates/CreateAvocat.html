@@ -15,6 +15,15 @@
     <main class="container mt-5">
 
         <form th:action="@{saveAvocat}" method="post">
+            <div class="mb-3">
+                <label for="specialite" class="form-label">Speciality:</label>
+                <select class="form-select" id="specialite" name="specialite">
+                    <option th:each="specialite : ${specialitesVue}" th:value="${specialite.id}">
+                        [[${specialite.nom}]]
+                    </option>
+                </select>
+            </div>
+
             <div>
                 <label class="form-label" for="nom">Name : </label>
                 <input class="form-control" type="text" id="nom" name="nom">

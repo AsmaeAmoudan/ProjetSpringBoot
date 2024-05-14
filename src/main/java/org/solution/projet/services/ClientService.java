@@ -12,8 +12,11 @@ public interface ClientService {
     void deleteClientById(Long id);
     void deleteAllClient();
     Client getClientById(Long id);
+
     List<Client> getAllClient();
 
 
 
+
+    //boolean createRendezVous(RendezVousDTO rendezVousDTO);
 }

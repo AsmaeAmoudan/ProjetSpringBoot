@@ -5,16 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.solution.projet.security.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+//@DiscriminatorValue("AVOCAT")
 @Data //getter + setter (lombok)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder //enregistre dans la BD depuis le code - BD no vierge
-public class Avocat {
+public class Avocat /*extends User*/ {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -28,13 +30,15 @@ public class Avocat {
     private String expérience;
     private String horaire_de_travail;
 
-    @ManyToOne
-    private Specialite specialite;
+    @ManyToMany
+    @JoinTable(name = "AVOCATS_SPECIALITES", // Join table name
+            joinColumns = @JoinColumn(name = "AVOCAT_ID"), // Foreign key for Avocat
+            inverseJoinColumns = @JoinColumn(name = "SPECIALITE_ID")) // Foreign key for Specialite
+    private List<Specialite> specialites = new ArrayList<>();
     @ManyToOne
     private Bureau bureau;
-    @OneToMany(mappedBy = "avocat", fetch = FetchType.LAZY)
-    private List<RendezVous> rendezVous=new ArrayList<>();
-    @OneToMany(mappedBy = "avocat", fetch = FetchType.LAZY)
-    private List<Avis> avis=new ArrayList<>();
+    @ManyToOne
+    private RendezVous rendezVous;
+
 
 }

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data //getter + setter (lombok)
 @AllArgsConstructor
@@ -19,9 +22,12 @@ public class Avis {
     private String note;
     private String commentaire;
 
-    @ManyToOne
-    private Client client;
-    @ManyToOne
-    private Avocat avocat;
+    @OneToMany(mappedBy="avis", fetch=FetchType.LAZY)
+    private List<Client> clients = new ArrayList<>();
+
+    // Remove @mappedBy and define owning side
+    @OneToOne
+    @JoinColumn(name = "rendez_vous_id", referencedColumnName = "id") // Adjust column name if needed
+    private RendezVous rendezVous ;
 
 }

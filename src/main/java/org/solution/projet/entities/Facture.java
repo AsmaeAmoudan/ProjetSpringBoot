@@ -20,7 +20,10 @@ public class Facture {
 
     @ManyToOne
     private Client client;
-    @OneToOne(mappedBy = "facture")
+
+    // Remove @mappedBy and define owning side
+    @OneToOne
+    @JoinColumn(name = "rendez_vous_id", referencedColumnName = "id") // Adjust column name if needed
     private RendezVous rendezVous;
 
 

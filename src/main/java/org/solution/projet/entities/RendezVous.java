@@ -5,9 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.solution.projet.enums.RendezVousStatus;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data //getter + setter (lombok)
@@ -24,11 +28,19 @@ public class RendezVous {
     private String durée;
     private RendezVousStatus status= RendezVousStatus.nouveau;
 
-    @ManyToOne
+    // One-to-One relationship with Client (owned by RendezVous)
+    @OneToOne(cascade = CascadeType.ALL) // Cascade persist/update/delete to Client
+    @JoinColumn(name = "client_id", referencedColumnName = "id") // Foreign key
     private Client client;
-    @ManyToOne
-    private Avocat avocat;
-    @OneToOne
-    @JoinColumn(name = "facture_id", referencedColumnName = "id")
+
+    // Many-to-Many relationship with Avocat (using a join table)
+    @ManyToMany
+    @JoinTable(name = "RENDEZVOUS_AVOCATS", // Join table name
+            joinColumns = @JoinColumn(name = "RENDEZVOUS_ID"), // Foreign key for RendezVous
+            inverseJoinColumns = @JoinColumn(name = "AVOCAT_ID")) // Foreign key for Avocat
+    private List<Avocat> avocats = new ArrayList<>();
+
+    // Add this line
+    @OneToOne(mappedBy = "rendezVous")
     private Facture facture;
 }

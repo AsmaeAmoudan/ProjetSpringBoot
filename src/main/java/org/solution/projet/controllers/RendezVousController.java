@@ -2,8 +2,10 @@ package org.solution.projet.controllers;
 
 import lombok.AllArgsConstructor;
 import org.solution.projet.entities.Avocat;
+import org.solution.projet.entities.Client;
 import org.solution.projet.entities.RendezVous;
 import org.solution.projet.services.AvocatService;
+import org.solution.projet.services.ClientService;
 import org.solution.projet.services.RendezVousService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,9 +19,13 @@ import java.util.List;
 @AllArgsConstructor
 public class RendezVousController {
     private RendezVousService rendezVousService;
+    private AvocatService avocatService;
+    private ClientService clientService;
 
     @RequestMapping("/createRendezVous")
-    public String createRendezVous() {
+    public String createRendezVous(ModelMap modelMap) {
+        List<Avocat> avocatsController= avocatService.getAllAvocat();
+        modelMap.addAttribute("avocatsVue", avocatsController);
         return "CreateRendezVous";
     }
 
@@ -51,10 +57,17 @@ public class RendezVousController {
         RendezVous rendezVous = rendezVousService.getRendezVousById(id);
         if (rendezVous != null) {
             modelMap.addAttribute("rendezVousVue", rendezVous);
-            return "editRendezVous";
+            return "EditRendezVous";
         } else {
             // Gérer le cas où l'avocat n'est pas trouvé
             return "error";
         }
+    }
+
+    @RequestMapping("/updateRendezVous")
+    public String updateRendezVous(@ModelAttribute("rendezVousVue") RendezVous rendezVousController){
+        rendezVousService.updateRendezVous(rendezVousController);
+        return "CreateRendezVous";
+
     }
 }

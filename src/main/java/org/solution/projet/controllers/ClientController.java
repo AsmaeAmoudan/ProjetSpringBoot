@@ -52,7 +52,7 @@ public class ClientController {
         Client client = clientService.getClientById(id);
         if (client != null) {
             modelMap.addAttribute("clientVue", client);
-            return "editClient";
+            return "EditClient";
         } else {
             // Gérer le cas où le client n'est pas trouvé
             return "error";

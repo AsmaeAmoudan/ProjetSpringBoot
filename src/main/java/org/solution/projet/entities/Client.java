@@ -5,17 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.solution.projet.security.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity //table creer dans BD
+//@DiscriminatorValue("CLIENT")
 @Data //getter + setter (lombok)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder //enregistre dans la BD depuis le code - BD no vierge
 
-public class Client {
+public class Client /*extends User*/ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,8 +32,11 @@ public class Client {
 
     @OneToMany(mappedBy="client", fetch=FetchType.LAZY)
     private List<Facture> factures = new ArrayList<>();
-    @OneToMany(mappedBy = "client")
-    private List<RendezVous> rendezVous= new ArrayList<>();
-    @OneToMany(mappedBy = "client")
-    private List<Avis> avis= new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "rendezVous_id", referencedColumnName = "id")
+    private RendezVous rendezVous;
+
+    @ManyToOne
+    private Avis avis;
 }
